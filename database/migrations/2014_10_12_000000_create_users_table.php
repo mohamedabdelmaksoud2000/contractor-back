@@ -18,10 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone');
-            $table->double('hourly_salary');
-            $table->double('monthly_salary');
-            $table->timestamps('birth_day');
-            $table->string('image');
+            $table->double('hourly_salary')->default(0);
+            $table->double('monthly_salary')->default(0);
+            $table->timestamp('birth_day')->nullable();
+            $table->string('image')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
