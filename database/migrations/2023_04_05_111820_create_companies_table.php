@@ -17,16 +17,16 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique;
-            $table->string('logo');
+            $table->string('logo')->nullable(); // logo_ image
             $table->string('email');
             $table->string('phone');
-            $table->string('link_website')->nullable;
-            $table->string('link_facebook')->nullable;
-            $table->string('link_twitter')->nullable;
-            $table->string('link_youtube')->nullable;
-            $table->string('link_linkedin')->nullable;
+            $table->string('link_website')->nullable();
+            $table->string('link_facebook')->nullable();
+            $table->string('link_twitter')->nullable();
+            $table->string('link_youtube')->nullable();
+            $table->string('link_linkedin')->nullable();
             $table->string('address_1');
-            $table->string('address_2')->nullable;  // عنوان اخر
+            $table->string('address_2')->nullable();  // عنوان اخر
             $table->string('country');          //الدوله
             $table->string('governorate');  // المقاطعة او المحافظة
             $table->string('city');         // المدينة
@@ -34,6 +34,7 @@ class CreateCompaniesTable extends Migration
             $table->foreignIdFor(User::class);
             $table->timestamps();
         });
+       
     }
 
     /**
