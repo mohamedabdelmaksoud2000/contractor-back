@@ -26,14 +26,15 @@ class CreateCompaniesTable extends Migration
             $table->string('link_youtube')->nullable();
             $table->string('link_linkedin')->nullable();
             $table->string('address_1');
-            $table->string('address_2')->nullable();
-            $table->string('country');
-            $table->string('governorate');
-            $table->string('city');
-            $table->string('zip_code');
+            $table->string('address_2')->nullable();  // عنوان اخر
+            $table->string('country');          //الدوله
+            $table->string('governorate');  // المقاطعة او المحافظة
+            $table->string('city');         // المدينة
+            $table->string('zip_code');     // رمز البريد
             $table->foreignIdFor(User::class);
             $table->timestamps();
         });
+       
     }
 
     /**

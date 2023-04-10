@@ -19,7 +19,6 @@ class CreateProjectsTable extends Migration
             $table->string('name');
             $table->text('describe');
             $table->foreignIdFor(Client::class); 
-
             $table->timestamp('Delivery_time');
             $table->timestamps();
         });

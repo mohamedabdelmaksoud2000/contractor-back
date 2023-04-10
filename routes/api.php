@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,11 +31,21 @@ Route::group(['middleware'=>'auth:sanctum' ,'prefix'=>'v1' ,'namspace'=>'Api'], 
     {
         Route::post('logout' ,[AuthController::class , 'logout'])->middleware('auth:sanctum');
 
+        // user Controller
+
         Route::get('users',[UserController::class ,'index']);
         Route::get('user/{id}/show',[UserController::class ,'show']);
         Route::put('user/{id}/update',[UserController::class ,'update']);
         Route::delete('user/{id}/delete',[UserController::class ,'delete']);
         Route::put('user/{id}/change_password',[UserController::class ,'change_password']);
+        
+        // Company Controller
+        Route::get('company',[CompanyController::class ,'index']);
+        Route::post('company/add_info',[CompanyController::class ,'store']);
+        Route::put('company/{id}/update',[CompanyController::class ,'update']);
+        Route::get('company/{id}/show',[CompanyController::class ,'show']);
+        Route::delete('company/{id}/delete',[CompanyController::class ,'delete']);
+        
     }
 
 );
