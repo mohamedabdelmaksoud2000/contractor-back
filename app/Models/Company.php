@@ -8,5 +8,37 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
+
+    protected $fillable=
+    [
+        'name',
+        'logo',
+        'email',
+        'phone',
+        'link_website',
+        'link_facebook',
+        'link_twitter',
+        'link_youtube',
+        'link_linkedin',
+        'address_1',
+        'address_2',
+        'country',
+        'governorate',
+        'city',
+        'zip_code',
+        'user_id'
+    ];
+
+    protected $casts = [
+        'email' => 'array',
+        'phone' => 'array'
+    ];
+
     public $guarded = [];
+
+    public function admin()
+    {
+        return $this->belongsTo(User::class , 'user_id' ,'id');
+    }
+
 }

@@ -18,20 +18,21 @@ class CreateClientsTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('name_company')->nullable();
-            $table->string('type_phone');
             $table->text('phone');
             $table->text('email');
             $table->string('link_website')->nullable();
             $table->string('link_facebook')->nullable();
             $table->string('link_twitter')->nullable();
             $table->string('link_youtupe')->nullable();
-            $table->string('link_linkedin')->nullable(0);
+            $table->string('link_linkedin')->nullable();
             $table->string('address_1');
             $table->string('address_2')->nullable();
             $table->string('country');
             $table->string('governorate');
             $table->string('city');
             $table->string('zip_code');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('companies');
             $table->timestamps();
         });
     }

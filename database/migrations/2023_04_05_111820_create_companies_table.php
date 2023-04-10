@@ -20,7 +20,7 @@ class CreateCompaniesTable extends Migration
             $table->string('logo');
             $table->text('email');
             $table->text('phone');
-            $table->string('link_webiste')->nullable();
+            $table->string('link_website')->nullable();
             $table->string('link_facebook')->nullable();
             $table->string('link_twitter')->nullable();
             $table->string('link_youtube')->nullable();
@@ -34,7 +34,7 @@ class CreateCompaniesTable extends Migration
             $table->foreignIdFor(User::class);
             $table->timestamps();
         });
-       
+
     }
 
     /**
