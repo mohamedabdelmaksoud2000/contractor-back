@@ -2,6 +2,7 @@
 
 Route::post('logout' ,[AuthController::class , 'logout'])->middleware('auth:sanctum');
 Route::get('users',[UserController::class ,'index']);
+Route::post('user/create' , [UserController::class , 'create']);
 Route::get('user/{id}/show',[UserController::class ,'show']);
 Route::put('user/{id}/update',[UserController::class ,'update']);
 Route::delete('user/{id}/delete',[UserController::class ,'delete']);
