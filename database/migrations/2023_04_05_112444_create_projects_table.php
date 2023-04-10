@@ -20,6 +20,8 @@ class CreateProjectsTable extends Migration
             $table->text('describe');
             $table->foreignIdFor(Client::class); 
             $table->timestamp('Delivery_time');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('companies');
             $table->timestamps();
         });
     }
