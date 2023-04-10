@@ -17,10 +17,10 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique;
-            $table->string('logo')->nullable(); // logo_ image
-            $table->string('email');
-            $table->string('phone');
-            $table->string('link_website')->nullable();
+            $table->string('logo');
+            $table->text('email');
+            $table->text('phone');
+            $table->string('link_webiste')->nullable();
             $table->string('link_facebook')->nullable();
             $table->string('link_twitter')->nullable();
             $table->string('link_youtube')->nullable();
