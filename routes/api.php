@@ -27,6 +27,7 @@ Route::group(['prefix'=>'v1' ,'namspace'=>'Api'], function()
         Route::post('login' ,[AuthController::class , 'login'] );
     }
 );
+
 Route::group(['middleware'=>'auth:sanctum' ,'prefix'=>'v1' ,'namspace'=>'Api'], function()
     {
         Route::post('logout' ,[AuthController::class , 'logout'])->middleware('auth:sanctum');
@@ -34,18 +35,20 @@ Route::group(['middleware'=>'auth:sanctum' ,'prefix'=>'v1' ,'namspace'=>'Api'], 
         // user Controller
 
         Route::get('users',[UserController::class ,'index']);
+        Route::post('user/create' , [UserController::class , 'create']);
         Route::get('user/{id}/show',[UserController::class ,'show']);
         Route::put('user/{id}/update',[UserController::class ,'update']);
         Route::delete('user/{id}/delete',[UserController::class ,'delete']);
         Route::put('user/{id}/change_password',[UserController::class ,'change_password']);
+
         
+
         // Company Controller
         Route::get('company',[CompanyController::class ,'index']);
         Route::post('company/add_info',[CompanyController::class ,'store']);
-        Route::put('company/{id}/update',[CompanyController::class ,'update']);
+        Route::post('company/{id}/update',[CompanyController::class ,'update']);
         Route::get('company/{id}/show',[CompanyController::class ,'show']);
         Route::delete('company/{id}/delete',[CompanyController::class ,'delete']);
-        
     }
 
 );
