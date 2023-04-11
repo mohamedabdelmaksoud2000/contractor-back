@@ -21,8 +21,8 @@ class CreateTasksTable extends Migration
             $table->text('describe');
             $table->foreignIdFor(Project::class);
             $table->foreignIdFor(Team::class);
-            $table->timestamp('start_time')->nullable();
-            $table->timestamp('end_time')->nullable();
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
             $table->string('status');
             $table->timestamps();
         });

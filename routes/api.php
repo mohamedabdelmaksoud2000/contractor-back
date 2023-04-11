@@ -30,7 +30,7 @@ Route::group(['prefix'=>'v1' ,'namspace'=>'Api'], function()
 Route::group(['middleware'=>'auth:sanctum' ,'prefix'=>'v1' ,'namspace'=>'Api'], function()
     {
         require 'API/user.php';
-        require 'API/cleint.php';
+        require 'API/company.php';
     }
 
 );
