@@ -13,7 +13,7 @@ class UpdateItemRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,11 @@ class UpdateItemRequest extends FormRequest
     {
         return [
             //
+            'name'          => 'max:255',
+            'type'          =>  'max:255',
+            'describe'      =>  'string',
+            'price'          =>  'numeric',
+            'image'          =>'image|max:20000,mimes:jpeg,jpg,png,svg|max:2048',
         ];
     }
 }

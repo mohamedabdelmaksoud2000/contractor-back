@@ -18,8 +18,15 @@ class CreateProjectsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('describe');
-            $table->foreignIdFor(Client::class); 
-            $table->timestamp('Delivery_time');
+            $table->double('budget');
+            $table->string('image');
+            $table->unsignedBigInteger('supervisor_id');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
+            $table->foreignIdFor(Client::class);
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('supervisor_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('company_id')->references('id')->on('companies');
             $table->timestamps();
         });
     }
