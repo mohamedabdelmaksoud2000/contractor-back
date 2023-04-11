@@ -17,12 +17,12 @@ class CreateTeamsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('describe');
-            $table->unsignedBigInteger('supervisor_id');
             $table->string('image');
-            $table->timestamps();
+            $table->unsignedBigInteger('supervisor_id');
             $table->foreign('supervisor_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies');
+            $table->timestamps();
         });
     }
 

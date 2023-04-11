@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
+    public $guarded = [];
 
     protected $fillable=
     [
@@ -34,11 +35,14 @@ class Company extends Model
         'phone' => 'array'
     ];
 
-    public $guarded = [];
-
     public function admin()
     {
         return $this->belongsTo(User::class , 'user_id' ,'id');
     }
 
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
+    
 }
