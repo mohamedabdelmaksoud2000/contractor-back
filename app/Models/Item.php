@@ -9,4 +9,14 @@ class Item extends Model
 {
     use HasFactory;
     public $guarded = [];
+
+    protected $fillable=[
+        'name',
+        'type',
+        'describe',
+        'price',
+        'image',
+        'company_id',
+    ];
+
 }

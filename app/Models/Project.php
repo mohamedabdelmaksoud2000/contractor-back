@@ -9,10 +9,22 @@ class Project extends Model
 {
     use HasFactory;
     public $guarded = [];
+    
+    protected $fillable=[
+        'name',
+        'describe',
+        'budget',
+        'image',
+        'supervisor_id',
+        'start_time',
+        'end_time',
+        'client_id',
+        'company_id',
+    ];
 
-    public function user()
+    public function supervisor()
     {
-        return $this->belongsTo(User::class , 'supervisor_id');
+        return $this->belongsTo(User::class,'supervisor_id','id');
     }
 
     public function client()
@@ -22,6 +34,11 @@ class Project extends Model
 
     public function company()
     {
-        return $this->belongsTo(Company::class , 'company_id');
+        return $this->belongsTo(Client::class , 'client_id' ,'id');
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class , 'projects_teams','project_id','team_id');
     }
 }
