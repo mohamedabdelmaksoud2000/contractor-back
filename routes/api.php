@@ -38,6 +38,8 @@ Route::group(['middleware'=>'auth:sanctum' ,'prefix'=>'v1' ,'namspace'=>'Api'], 
         require 'API\item.php';
         //Task Controller
         require 'API\task.php';
+        // Team Controller
+        require 'API\team.php';
 
     }
 
