@@ -26,7 +26,7 @@ class CompanyController extends Controller
             $data['name']               =$request->name;
             $data['phone']             =$request->phone;
             $data['email']              =$request->email;
-            $data['link_website' ]      =$request->link_website;
+            $data['link_webiste' ]      =$request->link_webiste;
             $data['link_facebook']       =$request->link_facebook;
             $data[ 'link_twitter' ]      =$request->link_twitter;
             $data[ 'link_youtube' ]       =$request->link_youtube;
@@ -39,13 +39,9 @@ class CompanyController extends Controller
             $data['zip_code' ]          =$request->zip_code;
             $data['user_id'  ]          = auth()->user()->id;
 
-            if ($logo_image = $request->file('logo')) {
-                $filename = Str::slug($request->name).'.'.$logo_image->getClientOriginalExtension();
-                $path = public_path('storage/logo/'. $filename);
-                Image::make($logo_image->getRealPath())->resize(300, 300, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($path, 100);
-                $data['logo']  = $filename;
+            if ( $request->file('logo')) {
+               $logo_image = $request->file('logo')->store('logo','public');
+                $data['logo']  =$logo_image;
             }
 
             $company=Company::create($data);
@@ -68,7 +64,7 @@ class CompanyController extends Controller
             $data['name']  = $request->name ? $request->name : $company->name;
             $data['phone']  =$request->phone ? $request->phone : $company->phone;
             $data['email'] =$request->email ? $request->email : $company->email;
-            $data['link_website' ]   =$request->link_website;
+            $data['link_webiste']   =$request->link_webiste;
             $data['link_facebook']    =$request->link_facebook;
             $data[ 'link_twitter' ]        =$request->link_twitter;
             $data[ 'link_youtube' ]      =$request->link_youtube;
@@ -80,7 +76,8 @@ class CompanyController extends Controller
             $data[ 'city']   =$request->city ? $request->city : $company->city;
             $data['zip_code' ]        = $request->zip_code ? $request->zip_code : $company->zip_code;
            $data['user_id'  ]      = auth()->user()->id;
-           if ($logo_image = $request->file('logo'))
+           
+           if ($request->file('logo'))
            {
               if ($company->logo != '')
               {
@@ -89,12 +86,8 @@ class CompanyController extends Controller
                       unlink('storage/logo/' . $company->logo);
                   }
               }
-              $filename = Str::slug($request->name).'.'.$logo_image->getClientOriginalExtension();
-              $path = public_path('storage/logo/'. $filename);
-              Image::make($logo_image->getRealPath())->resize(300, 300, function ($constraint) {
-                  $constraint->aspectRatio();
-              })->save($path, 100);
-              $data['logo']  = $filename;
+                $logo_image = $request->file('logo')->store('logo','public');
+                $data['logo']  =$logo_image;
            }
                $company->update($data);
            return response()->json([

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 Route::post('logout' ,[AuthController::class , 'logout'])->middleware('auth:sanctum');
 Route::get('users',[UserController::class ,'index']);

@@ -9,6 +9,7 @@ class Team extends Model
 {
     use HasFactory;
 
+    public $guarded = [];
 
     public function supervisor()
     {
