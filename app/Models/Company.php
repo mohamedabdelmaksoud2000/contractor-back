@@ -45,4 +45,8 @@ class Company extends Model
         return $this->hasMany(Employee::class);
     }
     
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }
