@@ -50,23 +50,20 @@ class UserController extends Controller
         $data['email'] =$request->email;
         $data[ 'phone']=$request->phone ;
         $data['birth_day'] =$request->birth_day ? $request->birth_day : Carbon::now();
-
-        if ($user_image = $request->file('image'))
+        $data['password']= bcrypt($request->password);
+        if($request->file('image'))
         {
-                $filename = Str::slug($request->name).'.'.$user_image->getClientOriginalExtension();
-                $path = public_path('storage/user_image/'. $filename);
-                Image::make($user_image->getRealPath())->resize(300, 300, function ($constraint) {
-                    $constraint->aspectRatio();
-                })->save($path, 100);
-                $data['image']  = $filename;
+            $image_user=$request->file('image')->store('user_image','public');
+            $data['image'] = $image_user;
         }
+
         $user= User::create($data);
+
             return response()->json([
                 'status' => true,
                 'message' => 'User Created Successfully',
                 'user' => $user,
-                'token' => $user->createToken("API TOKEN")->plainTextToken
-            ], 200);
+            ]);
     }
 
     /**
@@ -77,10 +74,10 @@ class UserController extends Controller
      */
     public function show(Request $request)
     {
-        $user =User::findOrFail($request->id)->get();
+        $user =User::findOrFail($request->id);
         return response()->json([
             'status'=>true,
-            'user'=>$user
+            'user'=>$user,
         ]);
     }
 
@@ -114,26 +111,24 @@ class UserController extends Controller
                 $data[ 'phone']=$request->phone ? $request->phon :$user->phone ;
                 $data['birth_day'] =$request->birth_day ? $request->birth_day : Carbon::now();
 
-                if ($user_image = $request->file('image'))
+                if ($request->file('image'))
                 {
                         if ($user->image != '')
                         {
-                            if (File::exists('storage/image_user/' . $user->image))
+                            if (File::exists('storage/user_image/' . $user->image))
                             {
-                                unlink('storage/image_user/' .$user->image);
+                                unlink('storage/user_image/' .$user->image);
                             }
                         }
-                        $filename = Str::slug($request->name).'.'.$user_image->getClientOriginalExtension();
-                        $path = public_path('storage/image_user/'. $filename);
-                        Image::make($user_image->getRealPath())->resize(300, 300, function ($constraint) {
-                            $constraint->aspectRatio();
-                        })->save($path, 100);
-                        $data['image']  = $filename;
+
+                        $image_user=$request->file('image')->store('user_image','public');
+                        $data['image'] = $image_user;
+
                 }
 
             }
-                $user->update($data);
 
+            $user->update($data);
                 return response()->json([
                     'status'=>true,
                     'data'=>$user,
@@ -169,7 +164,7 @@ class UserController extends Controller
              $update = $user->update([
                  'password' => bcrypt($request->password),
              ]);
-          
+
 
              if ($update) {
                  return response()->json([

@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\CompanyController;
-use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,12 +28,15 @@ Route::group(['prefix'=>'v1' ,'namspace'=>'Api'], function()
 
 Route::group(['middleware'=>'auth:sanctum' ,'prefix'=>'v1' ,'namspace'=>'Api'], function()
     {
-
-        // user Controller
-        require 'API/user.php';
-        // user campany
-        require 'API/company.php';
-
+        require 'API\user.php';
+        // Company Controller
+        require 'API\company.php';
+        // Item Contrller
+        require 'API\item.php';
+        //Task Controller
+        require 'API\task.php';
+        // Team Controller
+        require 'API\team.php';
     }
 
 );

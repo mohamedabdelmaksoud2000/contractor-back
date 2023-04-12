@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
+    public $guarded = [];
     
     protected $fillable=[
         'name',
@@ -28,6 +29,11 @@ class Project extends Model
 
     public function client()
     {
+        return $this->belongsTo(Client::class , 'client_id');
+    }
+
+    public function company()
+    {
         return $this->belongsTo(Client::class , 'client_id' ,'id');
     }
 
@@ -35,5 +41,4 @@ class Project extends Model
     {
         return $this->belongsToMany(Team::class , 'projects_teams','project_id','team_id');
     }
-    
 }
