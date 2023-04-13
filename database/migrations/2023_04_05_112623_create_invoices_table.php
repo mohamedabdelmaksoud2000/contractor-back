@@ -20,7 +20,7 @@ class CreateInvoicesTable extends Migration
             $table->timestamp('issued_date');
             $table->timestamp('due_date');
             $table->string('payment');
-            $table->text('message');
+            $table->text('message')->nullable();
             $table->double('subtotal');
             $table->double('discount');
             $table->string('type_discount');

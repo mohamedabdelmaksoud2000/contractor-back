@@ -49,4 +49,9 @@ class Company extends Model
     {
         return $this->hasMany(Invoice::class);
     }
+
+    public function professions()
+    {
+        return $this->hasMany(Profession::class,'company_id','id');
+    }
 }

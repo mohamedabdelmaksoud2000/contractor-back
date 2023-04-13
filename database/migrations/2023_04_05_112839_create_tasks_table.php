@@ -19,11 +19,13 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('describe');
-            $table->foreignIdFor(Project::class);
-            $table->foreignIdFor(Team::class);
+            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('team_id');
             $table->timestamp('start_time');
             $table->timestamp('end_time');
             $table->string('status');
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('team_id')->references('id')->on('teams');
             $table->timestamps();
         });
     }

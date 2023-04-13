@@ -15,7 +15,18 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            
+            $table->unsignedBigInteger('client_id');
+            $table->string('title');
+            $table->text('instruction');
+            $table->timestamp('start_day');
+            $table->timestamp('end_day');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
+            $table->double('subtotal');
+            $table->string('arrival_window');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('company_id')->references('id')->on('companies');
             $table->timestamps();
         });
     }

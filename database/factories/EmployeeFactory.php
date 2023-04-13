@@ -14,7 +14,11 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id'=> fack()->name(),
+            'company_id'=> fack()->name(),
+            'profession_id'=> fack()->name(),
+            'hourly_salary'=> fack()->name(),
+            'monthly_salary'=> fack()->name(),
         ];
     }
 }
