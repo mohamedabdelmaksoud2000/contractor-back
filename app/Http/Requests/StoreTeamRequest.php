@@ -27,6 +27,8 @@ class StoreTeamRequest extends FormRequest
             'name'          => 'required|max:255',
             'describe'      =>  'required',
             'image'          =>'image|max:20000,mimes:jpeg,jpg,png,svg|max:2048',
+            'supervisor_id'  =>  'required',
+            'company_id'      => 'required',
         ];
     }
 }
