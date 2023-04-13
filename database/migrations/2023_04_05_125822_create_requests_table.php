@@ -15,7 +15,17 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('client_id');
+            $table->string('title');
+            $table->timestamp('day');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
+            $table->unsignedBigInteger('team_id');
+            $table->string('instruction');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('company_id')->references('id')->on('companies');
         });
     }
 

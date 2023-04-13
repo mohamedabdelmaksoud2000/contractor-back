@@ -8,5 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     use HasFactory;
+
     public $guarded = [];
+
+    public function supervisor()
+    {
+        return $this->belongsTo(User::class,'supervisor_id','id');
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class ,'projects_teams','team_id','project_id');
+    }
+
+    public function 
 }

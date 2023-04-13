@@ -17,10 +17,12 @@ class CreateEmployeesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('profession_id');
             $table->double('hourly_salary')->default(0);
             $table->double('monthly_salary')->default(0);
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('profession_id')->references('id')->on('professions');
             $table->timestamps();
         });
     }

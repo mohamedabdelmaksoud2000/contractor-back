@@ -25,12 +25,9 @@ Route::group(['prefix'=>'v1' ,'namspace'=>'Api'], function()
         Route::post('login' ,[AuthController::class , 'login'] );
     }
 );
+
 Route::group(['middleware'=>'auth:sanctum' ,'prefix'=>'v1' ,'namspace'=>'Api'], function()
     {
-        Route::post('logout' ,[AuthController::class , 'logout'])->middleware('auth:sanctum');
-
-        // user Controller
-
         require 'API\user.php';
         // Company Controller
         require 'API\company.php';
@@ -40,9 +37,12 @@ Route::group(['middleware'=>'auth:sanctum' ,'prefix'=>'v1' ,'namspace'=>'Api'], 
         require 'API\task.php';
         // Team Controller
         require 'API\team.php';
+<<<<<<< HEAD
         //Profession Controller
         require 'API\profession.php';
 
+=======
+>>>>>>> b1a7ef6a014815b7db3e9c25be8395b5c0528430
     }
 
 );

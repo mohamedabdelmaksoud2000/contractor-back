@@ -20,6 +20,7 @@ class CreateProfessionsTable extends Migration
             $table->string('image');
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies')->onUpdate('cascade')->onDelete('cascade');
+
         });
     }
 
