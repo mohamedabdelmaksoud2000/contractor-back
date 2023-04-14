@@ -14,10 +14,20 @@ class CreateProjectsTeamsTable extends Migration
     public function up()
     {
         Schema::create('projects_teams', function (Blueprint $table) {
-            $table->unsignedBigInteger('project_id');
-            $table->unsignedBigInteger('team_id');
-            $table->foreign('project_id')->references('id')->on('projects');
-            $table->foreign('team_id')->references('id')->on('teams');
+            $table->id();
+            $table->string('name');
+            $table->text('describe');
+            $table->double('budget');
+            $table->string('image');
+            $table->unsignedBigInteger('supervisor_id');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
+            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('supervisor_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('client_id')->references('id')->on('clients');
+            $table->timestamps();
         });
     }
 

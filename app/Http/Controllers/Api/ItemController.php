@@ -128,10 +128,21 @@ class ItemController extends Controller
      */
     public function destroy(Request $request)
     {
-        Item::where('id' , $request->id)->delete();
+       $item= Item::where('id' , $request->id)->delete();
+       if ($item) {
         return response()->json([
             'status'=>true,
             'message' => 'Item deleted Successfully',
         ]);
+       }
+       else
+       {
+        return response()->json([
+            'status'=>false,
+            'message' => ' Error Item not deleted',
+        ]);
+       }
+
+
     }
 }

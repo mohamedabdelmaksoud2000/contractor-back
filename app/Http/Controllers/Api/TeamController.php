@@ -44,9 +44,12 @@ class TeamController extends Controller
         $data['describe'] = $request->describe ;
         $data['supervisor_id'] = $request->supervisor_id ;
         $data['company_id'] = $request->company_id ;
+        if($request->file('image'))
+        {
+            $team_image = $request->file('image')->store('team_image','public');
+            $data['image']  =$team_image;
 
-        $team_image = $request->file('image')->store('team_image','public');
-        $data['image']  =$team_image;
+        }
 
         $team = Team::create($data);
          return response()->json([
@@ -106,6 +109,13 @@ class TeamController extends Controller
                         {
                             unlink('storage/team_image/' . $team->image);
                         }
+
+                        $team_image = $request->file('image')->store('team_image','public');
+                        $data['image']  =$team_image;
+                    }
+
+                    else
+                    {
                         $team_image = $request->file('image')->store('team_image','public');
                         $data['image']  =$team_image;
                     }
@@ -128,10 +138,20 @@ class TeamController extends Controller
      */
     public function destroy(Request $request)
     {
-        Team::where('id',$request->id)->delete();
+       $team= Team::where('id',$request->id)->delete();
+
+       if ($team) {
         return response()->json([
             'status'=>true,
             'message' => 'Team deleted Successfully',
         ]);
+       } else {
+        return response()->json([
+            'status'=>false,
+            'message' => ' Error Team Not deleted ',
+        ]);
+       }
+
+
     }
 }

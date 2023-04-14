@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('teams' , [TeamController::class , 'index']);
 Route::get('team/{id}/show' , [TeamController::class , 'show']);
 Route::post('team/create' , [TeamController::class , 'store']);
-Route::post('team/{id}/updte' , [TeamController::class , 'update']);
-Route::delete('team/{id}/delete' , [TeamController::class , 'delete']);
+Route::post('team/{id}/update' , [TeamController::class , 'update']);
+Route::delete('team/{id}/delete' , [TeamController::class , 'destroy']);
 
 

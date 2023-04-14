@@ -24,10 +24,11 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('supervisor_id');
             $table->timestamp('start_time');
             $table->timestamp('end_time');
-            $table->foreignIdFor(Client::class);
+            $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('company_id');
             $table->foreign('supervisor_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('client_id')->references('id')->on('clients');
             $table->timestamps();
         });
     }

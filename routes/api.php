@@ -37,12 +37,10 @@ Route::group(['middleware'=>'auth:sanctum' ,'prefix'=>'v1' ,'namspace'=>'Api'], 
         require 'API\task.php';
         // Team Controller
         require 'API\team.php';
-<<<<<<< HEAD
         //Profession Controller
         require 'API\profession.php';
-
-=======
->>>>>>> b1a7ef6a014815b7db3e9c25be8395b5c0528430
+        //َQoute Controller
+        require 'API\quote.php' ;
     }
 
 );
