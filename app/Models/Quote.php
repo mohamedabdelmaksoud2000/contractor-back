@@ -17,7 +17,7 @@ class Quote extends Model
         'discount',
         'type_discount',
         'tax_name',
-        'tax_desribe',
+        'tax_describe',
         'tax_rate',
         'total',
         'note',

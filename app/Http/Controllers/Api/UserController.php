@@ -11,13 +11,10 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $users = User::all();
@@ -27,22 +24,6 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreUserRequest $request)
     {
 
@@ -66,39 +47,16 @@ class UserController extends Controller
             ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Request $request)
     {
-        $user =User::findOrFail($request->id);
+        $user =User::with(['employee'])->findOrFail($request->id);
         return response()->json([
             'status'=>true,
             'user'=>$user,
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         //
@@ -136,44 +94,35 @@ class UserController extends Controller
                 ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request)
     {
-        $user = User::where('id', $request->id)->delete();
+        $user = User::find($request->id)->delete();
         return response()->json([
             'status'=>true,
             'message' => 'User deleted Successfully',
         ]);
     }
 
-     // function to change_password
-     public function change_password(Request $request , $id)
-     {
-           $request->validate([
-             'current_password'  => 'required',
-             'password'          => 'required|confirmed'
-         ]);
+    // function to change_password
+    public function change_password(Request $request)
+    {
+        $request->validate([
+            'current_password'  => 'required',
+            'password'          => 'required|confirmed'
+        ]);
 
-         $user = User::findOrFail($id);
-         if (Hash::check($request->current_password, $user->password)) {
-             $update = $user->update([
-                 'password' => bcrypt($request->password),
-             ]);
+        $user = User::findOrFail($request->id);
+        if (Hash::check($request->current_password, $user->password)) {
+            $update = $user->update([
+                'password' => bcrypt($request->password),
+            ]);
 
-
-             if ($update) {
-                 return response()->json([
-                     'status' => true,
-                     'message' => 'User cahnge_password  Successfully',
-                 ], 200);
-             }
-
-
-         }
-     }
+            if ($update) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'User cahnge_password  Successfully',
+                ], 200);
+            }
+        }
+    }
 }

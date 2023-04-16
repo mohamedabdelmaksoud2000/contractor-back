@@ -14,22 +14,22 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fack()->name(),
-            'logo' => fack()->image(null, 640, 480),
-            'email' => fack()->email(),
-            'phone' => fack()->phoneNumber(),
-            'link_website' => fack()->url(),
-            'link_facebook' => fack()->freeEmail(),
-            'link_twitter' => fack()->freeEmail(),
-            'link_youtube' => fack()->freeEmail(),
-            'link_linkedin' => fack()->freeEmail(),
-            'address_1' => fack()->address(),
-            'address_2' => fack()->address(),
-            'country' => fack()->country(),
-            'governorate' => fack()->governorate(),
-            'city' => fack()->state(),
-            'zip_code' => fack()->state(),
-            'user_id' => fack()->postcode(),
+            'name' => $this->faker->name(),
+            'logo' => $this->faker->image(null, 640, 480),
+            'email' => $this->faker->email(),
+            'phone' => $this->faker->phoneNumber(),
+            'link_website' => $this->faker->url(),
+            'link_facebook' => $this->faker->freeEmail(),
+            'link_twitter' => $this->faker->freeEmail(),
+            'link_youtube' => $this->faker->freeEmail(),
+            'link_linkedin' => $this->faker->freeEmail(),
+            'address_1' => $this->faker->address(),
+            'address_2' => $this->faker->address(),
+            'country' => $this->faker->country(),
+            'governorate' => $this->faker->state(),
+            'city' => $this->faker->state(),
+            'zip_code' => $this->faker->state(),
+            'user_id' => 1,
         ];
     }
 }

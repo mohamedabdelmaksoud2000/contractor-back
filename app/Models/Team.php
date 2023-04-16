@@ -9,6 +9,14 @@ class Team extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'name',
+        'describe',
+        'image',
+        'supervisor_id',
+        'company_id',
+    ];
+
     public $guarded = [];
 
     public function supervisor()
@@ -21,5 +29,4 @@ class Team extends Model
         return $this->belongsToMany(Project::class ,'projects_teams','team_id','project_id');
     }
 
-    public function 
 }

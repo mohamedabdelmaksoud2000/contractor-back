@@ -35,12 +35,12 @@ class CompanyController extends Controller
             $data['address_2' ]          =$request->address_2;
             $data[  'country' ]           =$request->country;
             $data['governorate']       =$request->governorate;
-            $data[ 'city'    ]           =$request->city;
-            $data['zip_code' ]          =$request->zip_code;
-            $data['user_id'  ]          = auth()->user()->id;
+            $data[ 'city' ]           =$request->city;
+            $data['zip_code']          =$request->zip_code;
+            $data['user_id']          = $request->user_id;
 
             if ( $request->file('logo')) {
-               $logo_image = $request->file('logo')->store('logo','public');
+                $logo_image = $request->file('logo')->store('logo','public');
                 $data['logo']  =$logo_image;
             }
 
@@ -56,9 +56,10 @@ class CompanyController extends Controller
 
 
 
-    public function update(UpdateCompanyRequest $request ,$id)
-    {
-        $company = Company::findOrFail($id);
+    public function update(UpdateCompanyRequest $request)
+    {   
+        $company = Company::findOrFail($request->id);
+        
         if($company)
         {
             $data['name']  = $request->name ? $request->name : $company->name;
@@ -75,26 +76,25 @@ class CompanyController extends Controller
             $data['governorate']      =$request->governorate ? $request->governorate : $company->governorate;
             $data[ 'city']   =$request->city ? $request->city : $company->city;
             $data['zip_code' ]        = $request->zip_code ? $request->zip_code : $company->zip_code;
-           $data['user_id'  ]      = auth()->user()->id;
-           
-           if ($request->file('logo'))
-           {
-              if ($company->logo != '')
-              {
-                  if (File::exists('storage/logo/' . $company->logo))
-                   {
-                      unlink('storage/logo/' . $company->logo);
-                  }
-              }
+            
+            if ($request->file('logo'))
+            {
+                if ($company->logo != '')
+                {
+                    if (File::exists('storage/logo/' . $company->logo))
+                    {
+                        unlink('storage/logo/' . $company->logo);
+                    }
+                }
                 $logo_image = $request->file('logo')->store('logo','public');
                 $data['logo']  =$logo_image;
-           }
-               $company->update($data);
-           return response()->json([
-               'status'=>true,
-               'data' => $company,
-               'message' => 'Company Information Updated Successfully',
-           ]);
+            }
+                $company->update($data);
+            return response()->json([
+                'status'=>true,
+                'data' => $company,
+                'message' => 'Company Information Updated Successfully',
+            ]);
         }
     }
 
@@ -106,7 +106,7 @@ class CompanyController extends Controller
 
     public function delete(Request $request)
     {
-         Company::where('id' ,$request->id)->delete();
+        Company::find($request->id)->delete();
             return response()->json([
             'status'=>true,
             'message' => 'Company Information deleted Successfully',

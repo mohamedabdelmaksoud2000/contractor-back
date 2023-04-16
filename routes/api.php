@@ -23,20 +23,39 @@ Route::group(['prefix'=>'v1' ,'namspace'=>'Api'], function()
     {
         Route::post('register' ,[AuthController::class , 'register'] );
         Route::post('login' ,[AuthController::class , 'login'] );
+        Route::post('logout' ,[AuthController::class , 'login'] );
     }
 );
 
-Route::group(['middleware'=>'auth:sanctum' ,'prefix'=>'v1' ,'namspace'=>'Api'], function()
+Route::group(['prefix'=>'v1' ,'namspace'=>'Api'], function()
     {
         require 'API\user.php';
-        // Company Controller
+
         require 'API\company.php';
-        // Item Contrller
+
+        require 'API\client.php';
+
         require 'API\item.php';
-        //Task Controller
+
         require 'API\task.php';
-        // Team Controller
+
         require 'API\team.php';
+
+        require 'API\project.php';
+
+        require 'API\invoice.php';
+
+        require 'API\employee.php';
+
+        require 'API\profession.php';   
+
+        require 'API\job.php';
+
+        require 'API\quote.php';
+
+        require 'API\expense.php';
+
+        require 'API\request.php';
     }
 
 );

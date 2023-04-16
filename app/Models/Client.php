@@ -14,7 +14,6 @@ class Client extends Model
         'first_name',
         'last_name',
         'name_company',
-        'type_phone',
         'phone',
         'email',
         'link_website',

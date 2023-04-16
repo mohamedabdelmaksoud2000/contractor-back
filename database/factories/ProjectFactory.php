@@ -14,14 +14,14 @@ class ProjectFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fack()->name(),
-            'describe'=> fack()->sentence(),
-            'budget'=> fack()->randomNumber(5, true),
-            'image'=> fack()->image(null, 640, 480),
-            'supervisor_id'=> fack()->unique()->randomDigit(),
-            'start_time'=> fack()->time(),
-            'end_time'=> fack()->time(),
-            'client_id'=> fack()->unique()->randomDigit(),
+            'name' => $this->faker->name(),
+            'describe'=> $this->faker->sentence(),
+            'budget'=> $this->faker->randomNumber(5, true),
+            'image'=> $this->faker->image(null, 640, 480),
+            'supervisor_id'=> $this->faker->unique()->randomDigit(),
+            'start_time'=> $this->faker->time(),
+            'end_time'=> $this->faker->time(),
+            'client_id'=> $this->faker->unique()->randomDigit(),
             'company_id'=>1
         ];
     }

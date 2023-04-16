@@ -32,7 +32,6 @@ class ClientFactory extends Factory
             'city' => fack()->state(),
             'zip_code' =>fack()->postcode(),
             'company_id'=>1,
-            
         ];
     }
 }

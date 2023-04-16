@@ -22,7 +22,7 @@ class CreateQuotesTable extends Migration
             $table->double('discount');
             $table->string('type_discount');
             $table->string('tax_name');
-            $table->text('tax_desribe');
+            $table->text('tax_describe');
             $table->double('tax_rate');
             $table->double('total');
             $table->text('note')->nullable();

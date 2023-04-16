@@ -16,15 +16,15 @@ class AuthController extends Controller
     // function rgister new user
     public function register(Request $request)
     {
-       $failds= $request->validate([
+        $failds= $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required','min:4'],
-            'phone'=>['required','string','max:25'],
+            'phone'=>['string','max:25'],
             'birth_day' =>'date',
         ]);
+
         $failds['password']= Hash::make($failds['password']);
-        $failds['birth_day'] = Carbon::now();
         $user = User::create($failds);
         return response()->json([
             'status' => true,

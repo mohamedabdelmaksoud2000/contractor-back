@@ -16,6 +16,8 @@ class Profession extends Model
         'company_id'
     ];
 
+    public $timestamps = false;
+
     public function company()
     {
         return $this->belongsTo(Company::class , 'company_id','id');

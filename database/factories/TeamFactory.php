@@ -14,7 +14,11 @@ class TeamFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'=>$this->faker->name(),
+            'describe'=>$this->faker->sentence(),
+            'image'=>$this->faker->image(null, 640, 480),
+            'supervisor_id'=>2,
+            'company_id'=>1,
         ];
     }
 }

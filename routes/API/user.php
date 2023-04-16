@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AuthController;
+
 Route::post('logout' ,[AuthController::class , 'logout'])->middleware('auth:sanctum');
 Route::get('users',[UserController::class ,'index']);
-Route::post('user/create' , [UserController::class , 'create']);
-Route::get('user/{id}/show',[UserController::class ,'show']);
-Route::put('user/{id}/update',[UserController::class ,'update']);
-Route::delete('user/{id}/delete',[UserController::class ,'delete']);
-Route::put('user/{id}/change_password',[UserController::class ,'change_password']);
+Route::post('user/create' , [UserController::class , 'store']);
+Route::get('user/show',[UserController::class ,'show']);
+Route::put('user/update',[UserController::class ,'update']);
+Route::delete('user/delete',[UserController::class ,'destroy']);
+Route::put('user/change_password',[UserController::class ,'change_password']);

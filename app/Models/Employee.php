@@ -14,7 +14,6 @@ class Employee extends Model
         'profession_id',
         'hourly_salary',
         'monthly_salary',
-        'company_id'
     ];
     
     public function user()

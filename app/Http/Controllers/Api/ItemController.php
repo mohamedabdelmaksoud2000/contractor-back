@@ -10,33 +10,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 class ItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $items = Item::all();
         return response()->json($items);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreItemRequest $request)
     {
         $data['name'] = $request->name ;
@@ -48,8 +28,8 @@ class ItemController extends Controller
             $item_image = $request->file('image')->store('item_image','public');
             $data['image']  =$item_image;
 
-         $item = Item::create($data);
-         return response()->json([
+        $item = Item::create($data);
+        return response()->json([
             'status'=>true,
             'date' =>$item,
             'message' => 'Item  Added Successfully',
@@ -57,38 +37,16 @@ class ItemController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Request $request)
     {
         $item = Item::findOrFail($request->id);
         return response()->json($item);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateItemRequest $request, $id)
     {
+        
         $item = Item::findOrFail($id);
         if($item)
         {
@@ -100,15 +58,15 @@ class ItemController extends Controller
 
             if ($request->file('image'))
             {
-               if ($item->image != '')
-               {
-                   if (File::exists('storage/item_image/' . $item->image))
-                    {
-                       unlink('storage/item_image/' . $item->image);
-                   }
-               }
-               $item_image = $request->file('image')->store('item_image','public');
-               $data['image']  =$item_image;
+                if ($item->image != '')
+                {
+                    if (File::exists('storage/item_image/' . $item->image))
+                        {
+                        unlink('storage/item_image/' . $item->image);
+                    }
+                }
+                $item_image = $request->file('image')->store('item_image','public');
+                $data['image']  =$item_image;
             }
 
             $item->update($data);
@@ -120,15 +78,9 @@ class ItemController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        Item::where('id' , $request->id)->delete();
+        Item::find($id)->delete();
         return response()->json([
             'status'=>true,
             'message' => 'Item deleted Successfully',

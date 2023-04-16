@@ -17,25 +17,49 @@ class ProfessionSeeder extends Seeder
         $professions=[
             [
                 'name'=>'superadmin',
-                'describe'=>fack()->sentence(),
+                'describe'=>'idasofdihsap',
                 'image'=>'url_image',
                 'company_id'=>1
             ],
             [
                 'name'=>'admin',
-                'describe'=>fack()->sentence(),
+                'describe'=>'idasofdihsap',
+                'image'=>'url_image',
+                'company_id'=>1
+            ],
+            [
+                'name'=>'editor',
+                'describe'=>'idasofdihsap',
+                'image'=>'url_image',
+                'company_id'=>1
+            ],
+            [
+                'name'=>'engineer',
+                'describe'=>'idasofdihsap',
                 'image'=>'url_image',
                 'company_id'=>1
             ],
             [
                 'name'=>'supervisor',
-                'describe'=>fack()->sentence(),
+                'describe'=>'idasofdihsap',
+                'image'=>'url_image',
+                'company_id'=>1
+            ],
+            [
+                'name'=>'Account manager',
+                'describe'=>'idasofdihsap',
+                'image'=>'url_image',
+                'company_id'=>1
+            ],
+            [
+                'name'=>'Accountant',
+                'describe'=>'idasofdihsap',
                 'image'=>'url_image',
                 'company_id'=>1
             ],
             [
                 'name'=>'employee',
-                'describe'=>fack()->sentence(),
+                'describe'=>'idasofdihsap',
                 'image'=>'url_image',
                 'company_id'=>1
             ],
